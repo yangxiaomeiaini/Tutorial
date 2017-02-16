@@ -1,0 +1,385 @@
+<<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流</title>
+    <script src="jquery-3.1.0.min.js" type="text/javascript"></script>
+   
+
+</head>
+<style type="text/css">
+*{
+    margin:0;
+    padding: 0;
+}
+/*#main_left{
+    width: 400px;
+    height: 900px;
+     border: 1px solid red;
+    float: left;
+}*/
+    #main{
+        position: relative;
+        
+          /*border: 1px solid red;*/
+    }
+    .box{
+        padding:10px 0 0 10px;
+       /* border: 1px solid red;*/
+        float: left;
+
+    }
+    .pic{
+        padding: 10px ;
+        background: #e8e88e;
+         /*border: 1px solid green;*/
+    }
+    .pic img{
+        width: 200px;
+        height: auto;
+    }
+</style>
+<script>
+    $(window).on('load',function(){
+        waterfall();
+        var dataInt={"data":[ {'scr' :'0.jpg'},
+                              {'scr' :'1.jpg'},
+                              {'scr' :'2.jpg'},
+                              {'scr' :'3.jpg'},
+                              {'scr' :'4.jpg'},
+                              {'scr' :'5.jpg'},
+                              {'scr' :'6.jpg'},
+                              {'scr' :'7.jpg'},
+                              {'scr' :'8.jpg'},
+                              {'scr' :'9.jpg'}]}
+                             
+        $(window).on('scroll',function(){
+            if(checkScrollslide){
+                $.each(dataInt.data,function(key ,value){
+                    var oBox=$('<div>').addClass('box').appendTo('main');
+                    var oPic=$('<div>').addClass('pic').appendTo('oBox');
+                    $('<img>').attr('scr','image/'+$(value).attr('scr')).appendTo('oPic');
+                }).waterfall();
+
+
+            }
+        });
+    });
+    function  waterfall(){
+        var $boxs=$('#main>div');
+        var w=$boxs.eq(0).outerWidth(); 
+        var cols=Math.floor($(window).width()/w);
+        $("#main").width(w*cols).css('margin','0 auto');
+        var hArr=[];
+        $boxs.each(function(index,value){
+            var h=$boxs.eq(index).outerHeight();
+            if(index<cols){
+                hArr[index]=h;
+            }else{
+                var minH=Math.min.apply(null,hArr);
+                var minHIndex=$.inArray(minH,hArr);
+                $(value).css({
+                    'position':'absolute',
+                    'top':minH+'px',
+                     'left':minHIndex*w+'px',
+                });
+                hArr[minHIndex]+=$boxs.eq(index).outerHeight();
+            }
+        });
+
+    };
+    function  checkScrollslide(){
+        var $lastBox=$("#main>div").last();
+        var lastBoxDiv=$lastBox.offset().top()+Math.floor($lastBox.outerHeight/2);
+        var scrollTop=$(window).scrollTop();
+        var documentH=$(window).height();
+        return (lastBoxDiv<scrollTop+documentH?ture:false)
+
+    }
+</script>
+<body>
+<!-- <div id="main_lefft"></div> -->
+<div id="main">
+    <div class="box">
+        <div class="pic">
+            <img src="image/1.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/2.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/3.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/4.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/5.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/6.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/7.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/8.jpg">
+        </div>
+    </div>
+     <div class="box">
+        <div class="pic">
+            <img src="image/2.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/3.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/4.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/5.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/6.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/7.jpg">
+        </div>
+    </div>
+     <div class="box">
+        <div class="pic">
+            <img src="image/1.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/2.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/3.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/4.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/5.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/6.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/7.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/8.jpg">
+        </div>
+    </div>
+     <div class="box">
+        <div class="pic">
+            <img src="image/2.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/3.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/4.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/5.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/6.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/7.jpg">
+        </div>
+    </div>
+     <div class="box">
+        <div class="pic">
+            <img src="image/1.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/2.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/3.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/4.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/5.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/6.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/7.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/8.jpg">
+        </div>
+    </div>
+     <div class="box">
+        <div class="pic">
+            <img src="image/2.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/3.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/4.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/5.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/6.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/7.jpg">
+        </div>
+    </div>
+     <div class="box">
+        <div class="pic">
+            <img src="image/1.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/2.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/3.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/4.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/5.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/6.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/7.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/8.jpg">
+        </div>
+    </div>
+     <div class="box">
+        <div class="pic">
+            <img src="image/2.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/3.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/4.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/5.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/6.jpg">
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="image/7.jpg">
+        </div>
+    </div>
+</div>
+</body>
+</html>
